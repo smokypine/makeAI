@@ -1,0 +1,213 @@
+class HealthManagerApp:
+    def __init__(self):
+        self.health_data = {}
+        self.chronic_conditions_info = {
+            "고혈압": {
+                "주의사항": "저염식을 유지하고 규칙적으로 혈압을 측정하세요.",
+                "좋은 음식": ["바나나", "감자", "시금치", "생선"],
+                "피해야 할 음식": ["짠 음식", "가공 식품", "패스트푸드"]
+            },
+            "당뇨병": {
+                "주의사항": "혈당 수치를 꾸준히 체크하고 저탄수화물 식단을 유지하세요.",
+                "좋은 음식": ["귀리", "녹색 채소", "아몬드", "블루베리"],
+                "피해야 할 음식": ["단 음식", "정제 탄수화물", "설탕 음료"]
+            },
+            "고지혈증": {
+                "주의사항": "트랜스지방과 포화지방을 피하고 운동을 꾸준히 하세요.",
+                "좋은 음식": ["올리브유", "호두", "고등어", "아보카도"],
+                "피해야 할 음식": ["튀김 음식", "패스트푸드", "고지방 육류"]
+            },
+            "심장질환": {
+                "주의사항": "스트레스를 관리하고 심장 건강을 위한 운동을 하세요.",
+                "좋은 음식": ["연어", "아몬드", "브로콜리", "콩류"],
+                "피해야 할 음식": ["고지방 육류", "가공 식품", "소금이 많은 음식"]
+            },
+            "관절염": {
+                "주의사항": "체중 관리와 규칙적인 운동이 중요합니다.",
+                "좋은 음식": ["생선", "올리브유", "브로콜리", "당근"],
+                "피해야 할 음식": ["가공 식품", "설탕이 많은 음식", "알콜"]
+            },
+            "골다공증": {
+                "주의사항": "칼슘 섭취와 비타민 D를 충분히 섭취하세요.",
+                "좋은 음식": ["우유", "치즈", "시금치", "두부"],
+                "피해야 할 음식": ["알콜", "카페인", "짠 음식"]
+            },
+            "천식": {
+                "주의사항": "알레르기 유발 물질을 피하고 규칙적인 운동을 하세요.",
+                "좋은 음식": ["생강", "꿀", "사과", "브로콜리"],
+                "피해야 할 음식": ["유제품", "알레르기 유발 음식", "가공 식품"]
+            },
+            "위염": {
+                "주의사항": "자극적인 음식과 음료를 피하고 규칙적인 식사를 하세요.",
+                "좋은 음식": ["바나나", "미음", "삶은 채소", "쌀밥"],
+                "피해야 할 음식": ["커피", "탄산음료", "맵고 자극적인 음식"]
+            },
+            "간염": {
+                "주의사항": "간을 보호하는 식단을 유지하고 알콜을 피하세요.",
+                "좋은 음식": ["브로콜리", "녹차", "블루베리", "고등어"],
+                "피해야 할 음식": ["알콜", "기름진 음식", "정제된 설탕"]
+            },
+            "신장 질환": {
+                "주의사항": "나트륨 섭취를 줄이고 충분한 수분을 섭취하세요.",
+                "좋은 음식": ["고구마", "시금치", "사과", "당근"],
+                "피해야 할 음식": ["염분이 많은 음식", "가공 식품", "알콜"]
+            },
+            "치매": {
+                "주의사항": "두뇌 자극을 위한 활동과 규칙적인 운동이 필요합니다.",
+                "좋은 음식": ["블루베리", "호두", "연어", "올리브유"],
+                "피해야 할 음식": ["고지방 음식", "설탕이 많은 음식", "트랜스지방"]
+            },
+            "우울증": {
+                "주의사항": "스트레스를 관리하고 전문가의 상담을 받는 것이 중요합니다.",
+                "좋은 음식": ["다크 초콜릿", "연어", "견과류", "베리류"],
+                "피해야 할 음식": ["가공 식품", "설탕이 많은 음식", "알콜"]
+            },
+            "불면증": {
+                "주의사항": "규칙적인 수면 습관을 유지하고 카페인을 피하세요.",
+                "좋은 음식": ["체리", "호두", "바나나", "녹차"],
+                "피해야 할 음식": ["커피", "알콜", "카페인 음료"]
+            },
+            "고혈당": {
+                "주의사항": "규칙적인 운동과 저당식 식단을 유지하세요.",
+                "좋은 음식": ["귀리", "녹색 채소", "블루베리", "고구마"],
+                "피해야 할 음식": ["단 음식", "설탕 음료", "정제 탄수화물"]
+            },
+            "알레르기": {
+                "주의사항": "알레르기 원인 물질을 피하고 필요시 약물 복용을 꾸준히 하세요.",
+                "좋은 음식": ["꿀", "녹차", "사과", "오메가-3 지방산이 풍부한 음식"],
+                "피해야 할 음식": ["가공 식품", "유제품", "아황산염이 포함된 음식"]
+            }
+        }
+
+    def start_app(self):
+        while True:
+            print("\n--- 건강 관리 어플 ---")
+            print("1. 건강 데이터 입력")
+            print("2. 건강 데이터 분석")
+            print("3. 걸은 시간 입력 및 칼로리 계산")
+            print("4. 근처 산책로 추천")
+            print("5. 종료")
+            choice = input("옵션을 선택하세요: ")
+
+            if choice == "1":
+                self.input_health_data()
+            elif choice == "2":
+                if not self.health_data:
+                    print("먼저 건강 데이터를 입력하세요.")
+                else:
+                    self.analyze_data()
+            elif choice == "3":
+                self.calculate_calories_burned()
+            elif choice == "4":
+                self.recommend_nearby_trails()
+            elif choice == "5":
+                print("어플을 종료합니다. 안녕히 가세요!")
+                break
+            else:
+                print("잘못된 선택입니다. 다시 시도하세요.")
+
+    def input_health_data(self):
+        print("\n--- 건강 데이터 입력 ---")
+        self.health_data['weight'] = float(input("체중을 입력하세요 (kg): "))
+        self.health_data['blood_pressure'] = input("혈압을 입력하세요 (예: 120/80): ")
+
+        # 키를 cm 단위로 입력받고 m 단위로 변환
+        height_cm = float(input("키를 입력하세요 (cm): "))
+        height_m = height_cm / 100  # cm에서 m로 변환
+        self.health_data['height'] = height_m
+
+        # 만성 질환 목록 출력 후 번호로 선택
+        print("\n--- 만성 질환 선택 ---")
+        for idx, condition in enumerate(self.chronic_conditions_info.keys(), 1):
+            print(f"{idx}. {condition}")
+        print("0. 선택 완료")
+
+        selected_conditions = []
+        while True:
+            condition_choice = int(input(f"만성 질환을 선택하세요 (1-{len(self.chronic_conditions_info)}, 0: 완료): "))
+            if condition_choice == 0:
+                break
+            elif 1 <= condition_choice <= len(self.chronic_conditions_info):
+                selected_condition = list(self.chronic_conditions_info.keys())[condition_choice - 1]
+                if selected_condition not in selected_conditions:
+                    selected_conditions.append(selected_condition)
+                    print(f"선택한 만성 질환: {selected_condition}")
+                else:
+                    print(f"{selected_condition}은(는) 이미 선택되었습니다.")
+            else:
+                print("잘못된 선택입니다. 다시 시도하세요.")
+
+        self.health_data['chronic_conditions'] = selected_conditions
+        print("선택한 만성 질환 목록:", selected_conditions)
+        print("건강 데이터가 저장되었습니다.")
+
+    def analyze_data(self):
+        print("\n--- 건강 데이터 분석 중 ---")
+        bmi = self.calculate_bmi()
+        blood_pressure_status = self.evaluate_blood_pressure()
+
+        print(f"BMI: {bmi:.2f}")
+        print(f"혈압 상태: {blood_pressure_status}")
+
+        # 선택한 만성 질환 목록 출력
+        print("\n선택한 만성 질환 목록:")
+        conditions = self.health_data.get('chronic_conditions', [])
+        for condition in conditions:
+            print(f"- {condition}")
+            # 선택한 질환에 대한 주의사항, 좋은 음식, 피해야 할 음식 출력
+            if condition in self.chronic_conditions_info:
+                info = self.chronic_conditions_info[condition]
+                print(f"{condition} 관리 주의사항: {info['주의사항']}")
+                print(f"{condition}에 좋은 음식: {', '.join(info['좋은 음식'])}")
+                print(f"{condition}에 피해야 할 음식: {', '.join(info['피해야 할 음식'])}")
+
+    def calculate_bmi(self):
+        height = self.health_data['height']
+        weight = self.health_data['weight']
+        return weight / (height ** 2)
+
+    def evaluate_blood_pressure(self):
+        systolic, diastolic = map(int, self.health_data['blood_pressure'].split('/'))
+        if systolic < 120 and diastolic < 80:
+            return "정상"
+        elif 120 <= systolic < 130 and diastolic < 80:
+            return "상승"
+        elif systolic >= 130 or diastolic >= 80:
+            return "고혈압"
+        else:
+            return "비정상"
+
+    def calculate_calories_burned(self):
+        print("\n--- 걸은 시간 입력 및 칼로리 계산 ---")
+        weight_input = input("체중 데이터를 입력하지 않았다면, 체중을 입력하세요 (kg). 입력하지 않으려면 Enter를 누르세요: ")
+        if weight_input:
+            weight = float(weight_input)
+        elif 'weight' in self.health_data:
+            weight = self.health_data['weight']
+        else:
+            print("체중이 입력되지 않았습니다. 다시 시도하세요.")
+            return
+
+        walking_time = float(input("오늘 걸은 시간을 입력하세요 (시간 단위): "))
+        met_value = 3.5  # 일반적인 걷기의 MET 값
+        self.calories_burned = weight * walking_time * met_value
+        print(f"오늘 걷기로 소모한 칼로리: {self.calories_burned:.2f} kcal")
+
+    def recommend_nearby_trails(self):
+        address = input("\n현재 주소를 입력하세요: ")
+        print(f"{address} 근처의 추천 산책로:")
+        # 가상의 산책로 예시 (실제 API 사용 시 여기에 결과를 넣어야 함)
+        trails = [
+            "한강 공원 산책로",
+            "남산 둘레길",
+            "서울숲 산책로",
+            "올림픽공원 자전거 도로",
+            "경희궁 주변 산책로"
+        ]
+        for trail in trails:
+            print(f"- {trail}")
+
+
+if __name__ == "__main__":
+    app = HealthManagerApp()
+    app.start_app()
